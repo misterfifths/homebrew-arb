@@ -9,7 +9,7 @@ software.
 Open tasks
 
 - [ ] add stable version when 6.1 is released
-- [ ] configure Preview as viewer for PDF and PS files (removes GV dependency)
+- [x] configure Preview as viewer for PDF and PS files (enabled in HEAD version)
 - [ ] bottles
 - [ ] integration into the ARB release cycle, formula needs to be tagged, too
 - [ ] add formula for SINA
@@ -37,6 +37,8 @@ XQuartz website or via Homebrew:
 brew cask install xquartz
 ```
 
+**The following step is no longer necessary if you build the HEAD version of
+`arb`.**
 Homebrew has removed the `gv` formula from their repository. To install `arb`
 on fresh system (which had `gv` not installed via Homebrew previously), another
 tap must be added to Homebrew.
@@ -198,3 +200,61 @@ You can list the installed versions of ARB with
 ```bash
 brew list --versions arb
 ```
+
+## Configuration
+
+`arb` supports several environment variables to customise parts of the
+application as described in the [help](http://help.arb-home.de/arb_envar.html).
+The following sections descript MacOS specific values to be used for variables
+ which customise the external applications `arb` calls to view / edit files.
+
+### `ARB_TEXTEDIT`
+
+This variable defines the application `arb` starts for editing text files.
+Under MacOS this defaults to `TextEdit`. If you have set a different default
+text editor for MacOS and want to use it with `arb`, too, set the environment
+variable to the following value:
+
+```bash
+export ARB_TEXTEDIT="open -t"
+```
+
+To use a different MacOS application than your default text editor with `arb`,
+you need to pass its name to the `open` command, e.g. for using the `BBEdit`
+editor you would use the following value:
+
+```bash
+export ARB_TEXTEDIT="open -a BBEdit"
+```
+
+### `ARB_GS`
+
+This variable defines the application that `arb` calls to show Postscript files.
+If you do not set this variable, the default application registered for
+Postscript files on your MacOS will be used, MacOS default is `Apple Preview`.
+
+If you want to use a different application, e.g. Affinity Designer to open the
+Postscript files from within ARB, you can use the following value:
+
+```bash
+export ARB_GS="open -W -a 'Affinity Designer'"
+```
+
+Please make sure that you add the `-W` option to the `open` comannd. Otherwise,
+`arb` might delete the file before the other program reads it.
+
+### `ARB_PDFVIEW`
+
+This variable defines the application that `arb` calls to show PDF files. If you
+do not set this variable, the default application registered for PDF files on
+your MacOS will be used, MacOS default is `Apple Preview`.
+
+If you want to use a different application, e.g. Affinity Designer to open the
+PDF files from within ARB, you can use the following value:
+
+```bash
+export ARB_PDFVIEW="open -W -a 'Affinity Designer'"
+```
+
+Please make sure that you add the `-W` option to the `open` comannd. Otherwise,
+`arb` might delete the file before the other program reads it.

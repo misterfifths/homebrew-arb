@@ -51,13 +51,17 @@ class Arb < Formula
   depends_on "gnu-sed"
   depends_on "gnu-time"
   depends_on "gnuplot"
-  depends_on "gv"
   depends_on "lynx"
   depends_on "openmotif"
   depends_on "perl@5.18"
   depends_on :x11
   depends_on "xerces-c"
   depends_on "xfig"
+
+  # HEAD does no longer require GhostView
+  if !build.head?
+    depends_on "gv"
+  end
 
   # OpenGL dependencies, only used if build with '--with-open-gl'
   if build.with?("open-gl")
