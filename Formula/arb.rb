@@ -203,3 +203,24 @@ diff --git a/SH/arb b/SH/arb
  # set -x
 
  # error message function
+diff --git a/GDE/MUSCLE/src/subfams.cpp b/GDE/MUSCLE/src/subfams.cpp
+--- a/GDE/MUSCLE/src/subfams.cpp
++++ b/GDE/MUSCLE/src/subfams.cpp
+@@ -1,7 +1,7 @@
+ #include "muscle.h"
+ #include "distfunc.h"
+ 
+-const float INFINITY = float(1e29);
++const float M_INFINITY = float(1e29);
+ const unsigned NILL = uInsane;
+ 
+ static float *ShortestPathEstimate;
+@@ -43,7 +43,7 @@ static void InitializeSingleSource(DistFunc &DF, unsigned uIndex)
+ 
+ 	for (unsigned i = 0; i < uNodeCount; ++i)
+ 		{
+-		ShortestPathEstimate[i] = INFINITY;
++		ShortestPathEstimate[i] = M_INFINITY;
+ 		Predecessor[i] = NILL;
+ 		}
+ 	ShortestPathEstimate[uIndex] = 0;
